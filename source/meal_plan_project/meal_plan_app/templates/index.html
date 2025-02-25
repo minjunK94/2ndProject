@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>식단 추천</title>
+</head>
+<body>
+    <h1>맞춤형 식단 추천 시스템</h1>
+
+    <form action="{% url 'recommend_meal' %}" method="post">
+        {% csrf_token %}
+
+        <label for="gender">성별:</label>
+        <select name="gender" id="gender">
+            <option value="남성">남성</option>
+            <option value="여성">여성</option>
+        </select>
+        <br><br>
+
+        <label for="body_type">체형:</label>
+        <select name="body_type" id="body_type">
+            <option value="사과형">사과형</option>
+            <option value="배형">배형</option>
+            <option value="모래시계형">모래시계형</option>
+            <option value="엉덩이형">엉덩이형</option>
+            <option value="상체형">상체형</option>
+            <option value="하체형">하체형</option>
+            <option value="표준체형">표준체형</option>
+        </select>
+        <br><br>
+
+        <label for="goal">목표:</label>
+        <select name="goal" id="goal">
+            <option value="다이어트">다이어트</option>
+            <option value="유지">유지</option>
+            <option value="근육 증가">근육 증가</option>
+        </select>
+        <br><br>
+
+        <button type="submit">추천 식단 보기</button>
+    </form>
+</body>
+</html>

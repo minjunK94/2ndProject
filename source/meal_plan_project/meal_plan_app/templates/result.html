@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>추천 식단</title>
+</head>
+<body>
+    <h1>추천 식단 결과</h1>
+
+    <p><strong>성별:</strong> {{ gender }}</p>
+    <p><strong>체형:</strong> {{ body_type }}</p>
+    <p><strong>목표:</strong> {{ goal }}</p>
+
+    <h2>일일 영양소 권장량</h2>
+    <p>총 칼로리: {{ recommended_calories }} kcal</p>
+    <p>탄수화물: {{ recommended_carbs }} g</p>
+    <p>단백질: {{ recommended_protein }} g</p>
+    <p>지방: {{ recommended_fat }} g</p>
+
+    <h2>추천 식단</h2>
+    <p><strong>아침:</strong> {{ breakfast }}</p>
+    <p><strong>점심:</strong> {{ lunch }}</p>
+    <p><strong>저녁:</strong> {{ dinner }}</p>
+
+    <br>
+    <a href="{% url 'home' %}">다시 입력하기</a>
+</body>
+</html>

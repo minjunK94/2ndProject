@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>추천 식단</title>
+</head>
+<body>
+
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% else %}
+        <h2>===== 예측 결과 =====</h2>
+        <p>총 섭취 칼로리: {{ meal_plan.total_calories }} kcal</p>
+        <p>탄수화물: {{ meal_plan.total_carbs }} g</p>
+        <p>단백질: {{ meal_plan.total_protein }} g</p>
+        <p>지방: {{ meal_plan.total_fat }} g</p>
+
+        <h2>===== 추천 식단 =====</h2>
+
+        <h3>아침</h3>
+        <ul>
+          {% for item in meal_plan.breakfast %}
+            <li>{{ item.식품명 }} (칼로리: {{ item.칼로리 }}kcal, 탄: {{ item.탄수화물 }}g, 단: {{ item.단백질 }}g, 지: {{ item.지방 }}g)</li>
+          {% endfor %}
+        </ul>
+
+        <h3>점심</h3>
+        <ul>
+          {% for item in meal_plan.lunch %}
+            <li>{{ item.식품명 }} (칼로리: {{ item.칼로리 }}kcal, 탄: {{ item.탄수화물 }}g, 단: {{ item.단백질 }}g, 지: {{ item.지방 }}g)</li>
+          {% endfor %}
+        </ul>
+
+        <h3>저녁</h3>
+        <ul>
+          {% for item in meal_plan.dinner %}
+            <li>{{ item.식품명 }} (칼로리: {{ item.칼로리 }}kcal, 탄: {{ item.탄수화물 }}g, 단: {{ item.단백질 }}g, 지: {{ item.지방 }}g)</li>
+          {% endfor %}
+        </ul>
+    {% endif %}
+
+    <a href="{% url 'home' %}">다시 입력하기</a>
+</body>
+</html>
