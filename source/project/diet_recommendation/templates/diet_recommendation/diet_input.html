@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>식단 추천 입력</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light text-center">
+    <div class="container mt-5">
+        <h2 class="mb-4">맞춤형 식단 추천</h2>
+        <div class="row d-flex align-items-start">
+            <div class="col-md-5">
+                <form method="post" class="p-4 bg-white shadow rounded">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label class="form-label">성별:</label>
+                        <select name="gender" class="form-select">
+                            <option value="0" {% if selected_gender == "0" %}selected{% endif %}>남성</option>
+                            <option value="1" {% if selected_gender == "1" %}selected{% endif %}>여성</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">체형:</label>
+                        <select name="body_type" class="form-select">
+                            <option value="0" {% if selected_body_type == "0" %}selected{% endif %}>사과형</option>
+                            <option value="1" {% if selected_body_type == "1" %}selected{% endif %}>배형</option>
+                            <option value="2" {% if selected_body_type == "2" %}selected{% endif %}>모래시계형</option>
+                            <option value="3" {% if selected_body_type == "3" %}selected{% endif %}>엉덩이형</option>
+                            <option value="4" {% if selected_body_type == "4" %}selected{% endif %}>상체형</option>
+                            <option value="5" {% if selected_body_type == "5" %}selected{% endif %}>하체형</option>
+                            <option value="6" {% if selected_body_type == "6" %}selected{% endif %}>표준체형</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">목표:</label>
+                        <select name="goal" class="form-select">
+                            <option value="0" {% if selected_goal == "0" %}selected{% endif %}>다이어트</option>
+                            <option value="1" {% if selected_goal == "1" %}selected{% endif %}>유지</option>
+                            <option value="2" {% if selected_goal == "2" %}selected{% endif %}>근육 증가</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100">분석</button>
+                </form>
+            </div>
+            {% if total_calories %}
+            <div class="col-md-6 ms-md-4 mt-4 mt-md-0">
+                <div class="p-4 bg-white shadow rounded">
+                    <h3>📌 선택한 조건</h3>
+                    <p><strong>성별:</strong> {{ selected_gender_text }}</p>
+                    <p><strong>체형:</strong> {{ selected_body_type_text }}</p>
+                    <p><strong>목표:</strong> {{ selected_goal_text }}</p>
+
+                    <h3 class="mt-4">일일 섭취량 추천:</h3>
+                    <p><strong>총 칼로리:</strong> {{ total_calories }} kcal</p>
+                    <p><strong>탄수화물:</strong> {{ carbs }} g</p>
+                    <p><strong>단백질:</strong> {{ protein }} g</p>
+                    <p><strong>지방:</strong> {{ fat }} g</p>
+
+                    <h3>🍽 추천 식단</h3>
+                    <ul>
+                        <li>🍳 아침:
+                            {% for food in breakfast %}
+                                {{ food }}
+                            {% empty %}
+                                추천 식단이 없습니다.
+                            {% endfor %}
+                        </li>
+
+                        <li>🍛 점심:
+                            {% for food in lunch %}
+                                {{ food }}
+                            {% empty %}
+                                추천 식단이 없습니다.
+                            {% endfor %}
+                        </li>
+
+                        <li>🥗 저녁:
+                            {% for food in dinner %}
+                                {{ food }}
+                            {% empty %}
+                                추천 식단이 없습니다.
+                            {% endfor %}
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- 부트스트랩 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
